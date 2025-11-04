@@ -22,7 +22,7 @@ core
 *.core
 
 # VS Code settings
-.vscode/
+.vscode
 
 # Build directories
 build/

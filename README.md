@@ -1,18 +1,18 @@
-# Stack Based Virtual Machine
+# A Stack Based Virtual Machine
 [![Language](https://img.shields.io/badge/Language-C%2B%2B-blue.svg)](https://isocpp.org/)
 
 A simple stack-based virtual machine built in C++. This project was inspired by Felix Angell's tutorial and serves as a stepping stone to better understand computer architecture and build more complex projects like a CHIP-8 virtual machine or an NES emulator.
 
 ## Core functionality
 
-* **Instructions**: Implemented 5 instructions to manipulate the stack and registers.
-    * `PSH <value>`: Pushes a value onto the stack.
-    * `ADD`: Pops two values from the stack, adds them, and pushes the result back.
-    * `POP`: Pops a value from the stack and prints it to the console.
-    * `SET <register> <value>`: Sets a register to the specified value.
-    * `HLT`: Halts execution.
-* **Registers**: Includes 8 general-purpose registers, plus the Stack Pointer (SP) and Instruction Pointer (IP).
-* **Assembler**: A simple assembler is included to convert assembly-like text files into machine code that the VM can execute.
+* **Instructions**: Implemented a set of 18 instructions to manipulate the stack, registers, and control program flow.
+    * **Stack Operations**: `PSH <val>`, `POP`, `PRN`
+    * **Register Operations**: `SET <reg> <val>`, `MOV <reg1> <reg2>`, `LOD <reg>`, `STR <reg>`
+    * **Arithmetic**: `ADD`, `SUB`, `MUL`, `DIV`, `MOD`
+    * **Control Flow**: `CMP`, `JMP <addr>`, `JEQ <addr>`, `JNE <addr>`, `JLT <addr>`, `JGT <addr>`
+    * **Execution**: `HLT`
+* **Registers**: Includes 6 general-purpose registers (A-F), plus the Stack Pointer (SP) and Instruction Pointer (IP).
+* **Assembler**: A simple assembler is included to convert assembly-like text files into machine code that the VM can execute.(currently does not support empty lines or lines with only comments)
 
 
 ## Prerequisites
@@ -24,8 +24,8 @@ A simple stack-based virtual machine built in C++. This project was inspired by 
 
 1. **Clone the repository**:
     ```bash
-    git clone https://github.com/Shanwis/Stack-Based-Virtual-Machine.git
-    cd Stack-Based-Virtual-Machine
+    git clone https://github.com/Shanwis/Toy-Virtual-Machine.git
+    cd Toy-Virtual-Machine
     ```
 2. **Run the VM**:
     ```
@@ -38,11 +38,25 @@ A simple stack-based virtual machine built in C++. This project was inspired by 
 
     **`my_program.asm`**
     ```asm
-    ; Pushes 5 and 10 to the stack, adds them, and prints the result (15)
-    PSH 5
-    PSH 10
-    ADD
-    POP
+    PSH 6       ; Push 5
+    STR A       ; Store n in register A (A=5). Stack is empty.
+    PSH 1       ; Push 1
+    STR B       ; Store result in register B (B=1). Stack is empty.
+    LOD A       ; Push n (from reg A)
+    PSH 1       ; Push 1
+    CMP         ; Compare n and 1
+    JEQ 31      ; If n == 1, jump to 'end' (Address 31)
+    LOD B       ; Push result (from reg B)
+    LOD A       ; Push n (from reg A)
+    MUL         ; Pop n, pop result. Push (result * n)
+    STR B       ; Store new result in reg B. Stack is empty.
+    LOD A       ; Push n (from reg A)
+    PSH 1       ; Push 1
+    SUB         ; Pop 1, pop n. Push (n - 1)
+    STR A       ; Store new n in reg A. Stack is empty.
+    JMP 8       ; Jump back to loop start (Address 8)
+    LOD B       ; Push final result from reg B
+    PRN         ; Print it
     HLT
     ```
 
