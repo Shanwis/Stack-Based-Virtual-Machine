@@ -9,7 +9,7 @@ int main(int argc,char *argv[]){
         return -1;
     }
     VM vm1;
-    init_vm(&vm1, program, sizeof(program)/sizeof(program[0]));
+    init_vm(&vm1, program, size);
     run(&vm1);
     return 0;
 }

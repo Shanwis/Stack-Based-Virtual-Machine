@@ -16,7 +16,7 @@ $(TARGET):$(OBJ)
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-run:$(TRAGET)
+run:$(TARGET)
 	./$(TARGET) $(FILE)
 
 clean:
