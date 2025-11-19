@@ -1,5 +1,5 @@
-#include "../include/virtualMachine.h"
-#include "../include/assembler.h"
+#include <Toy-Virtual-Machine/virtualMachine.h>
+#include <Toy-Virtual-Machine/assembler.h>
 
 int main(int argc,char *argv[]){
     int program[PROGRAM_SIZE];

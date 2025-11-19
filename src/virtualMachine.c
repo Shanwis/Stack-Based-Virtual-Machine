@@ -1,4 +1,4 @@
-#include "../include/virtualMachine.h"
+#include <Toy-Virtual-Machine/virtualMachine.h>
 
 void init_vm(VM *vm, const int *program, int program_size){
     for(int i=0;i<NUM_OF_REGISTERS;i++){

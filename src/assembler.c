@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-#include "../include/assembler.h"
+#include <Toy-Virtual-Machine/assembler.h>
 
 InstructionMapping instruction_table[NUM_OF_INSTRUCTIONS] = {
     {"PSH", PSH}, {"POP", POP}, {"SET", SET},
@@ -52,6 +52,7 @@ int assemble_file(const char *filename, int *program) {
     while(fgets(line, 128, fp)){
         line[strcspn(line, "\n;")] = '\0';
         int opcode;
+        if(line[0] == '\0') continue;
         char *instr = strtok(line, " ");
         char *arg = strtok(NULL, " ");
         if((opcode = find_opcode(instr)) == -1){
