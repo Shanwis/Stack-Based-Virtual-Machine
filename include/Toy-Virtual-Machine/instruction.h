@@ -50,8 +50,13 @@ typedef struct {
 } VM;
 
 typedef struct{
-    const char *name;
+    char name[64];
     int opcode;
 } InstructionMapping;
+
+typedef struct{
+    char label[64];
+    int address;
+} Labels;
 
 #endif

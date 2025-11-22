@@ -12,7 +12,7 @@ A simple stack-based virtual machine built in C++. This project was inspired by 
     * **Control Flow**: `CMP`, `JMP <addr>`, `JEQ <addr>`, `JNE <addr>`, `JLT <addr>`, `JGT <addr>`
     * **Execution**: `HLT`
 * **Registers**: Includes 6 general-purpose registers (A-F), plus the Stack Pointer (SP) and Instruction Pointer (IP).
-* **Assembler**: A simple assembler is included to convert assembly-like text files into machine code that the VM can execute.(currently does not support empty lines or lines with only comments)
+* **Assembler**: A two-pass assembler is included to convert assembly-like text files into machine code that the VM can execute. Supports labels as well.
 
 
 ## Prerequisites
@@ -38,27 +38,28 @@ A simple stack-based virtual machine built in C++. This project was inspired by 
 
     **`my_program.asm`**
     ```asm
-    PSH 6       ; Push 5
+    PSH 5       ; Push 5
     STR A       ; Store n in register A (A=5). Stack is empty.
     PSH 1       ; Push 1
     STR B       ; Store result in register B (B=1). Stack is empty.
-    LOD A       ; Push n (from reg A)
-    PSH 1       ; Push 1
-    CMP         ; Compare n and 1
-    JEQ 31      ; If n == 1, jump to 'end' (Address 31)
-    LOD B       ; Push result (from reg B)
-    LOD A       ; Push n (from reg A)
-    MUL         ; Pop n, pop result. Push (result * n)
-    STR B       ; Store new result in reg B. Stack is empty.
-    LOD A       ; Push n (from reg A)
-    PSH 1       ; Push 1
-    SUB         ; Pop 1, pop n. Push (n - 1)
-    STR A       ; Store new n in reg A. Stack is empty.
-    JMP 8       ; Jump back to loop start (Address 8)
-    LOD B       ; Push final result from reg B
-    PRN         ; Print it
-    HLT
-    ```
+    loop:
+        LOD A       ; Push n (from reg A)
+        PSH 1       ; Push 1
+        CMP         ; Compare n and 1
+        JEQ finish      ; If n == 1, jump to 'end' (Address 31)
+        LOD B       ; Push result (from reg B)
+        LOD A       ; Push n (from reg A)
+        MUL         ; Pop n, pop result. Push (result * n)
+        STR B       ; Store new result in reg B. Stack is empty.
+        LOD A       ; Push n (from reg A)
+        PSH 1       ; Push 1
+        SUB         ; Pop 1, pop n. Push (n - 1)
+        STR A       ; Store new n in reg A. Stack is empty.
+        JMP loop    ; Jump back to loop start (Address 8)
+    finish:
+        LOD B       ; Push final result from reg B
+        PRN         ; Print it
+        HLT
 
 4.  **Run the program:**
     Use the `make run` command and pass the program file path as an argument.
