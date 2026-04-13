@@ -1,7 +1,7 @@
 # A Stack Based Virtual Machine
-[![Language](https://img.shields.io/badge/Language-C%2B%2B-blue.svg)](https://isocpp.org/)
+[![Language](https://img.shields.io/badge/Language-C-blue.svg)](https://en.wikipedia.org/wiki/C_(programming_language))
 
-A simple stack-based virtual machine built in C++. This project was inspired by Felix Angell's tutorial and serves as a stepping stone to better understand computer architecture and build more complex projects like a CHIP-8 virtual machine or an NES emulator.
+A simple stack-based virtual machine built in C. This project was inspired by Felix Angell's tutorial and serves as a stepping stone to better understand computer architecture and build more complex projects like a CHIP-8 virtual machine or an NES emulator.
 
 ## Core functionality
 
@@ -17,7 +17,7 @@ A simple stack-based virtual machine built in C++. This project was inspired by 
 
 ## Prerequisites
 
-* A C++ compiler that supports C++11 (e.g., g++, Clang).
+* A C compiler (e.g., gcc, Clang).
 * The `make` build automation tool.
 
 ## Try for yourself

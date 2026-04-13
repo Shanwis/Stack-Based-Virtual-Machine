@@ -11,5 +11,5 @@ int main(int argc,char *argv[]){
     VM vm1;
     init_vm(&vm1, program, size);
     run(&vm1);
-    return 0;
+    return 0; //this is a trial comment nothing more
 }
